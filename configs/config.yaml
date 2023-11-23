@@ -1,0 +1,63 @@
+seed: 26
+gpu_id: "0"
+
+mode:
+  training: false
+  testing: true
+
+training:
+testing:
+  batch_size: 1
+  n_epochs: 10000
+  n_round: 10
+  n_tracker: 100
+  num_workers: 1
+  phi_size: 5
+  kernel_size: 5
+  
+data:
+  dataset_name: "fastMRI_knee"
+  channels: 15
+  image_size: 320
+  logit_transform: false
+  uniform_dequantization: false
+  gaussian_dequantization: false
+  rescaled: false
+  num_workers: 12
+
+model:
+  modelC:
+    name: "hat_csm"  
+    nch_in: 2
+    nch_h: 64
+    nch_out: 30
+    layerNo: 5
+    filter_size: 3
+    in_size: [3,3]
+    out_size: [11,11]
+  modelCH:
+    name: "hat_csm_H" 
+    nch_in: 2
+    nch_h: 64
+    nch_out: 30
+    layerNo: 5
+    filter_size: 3
+    in_size: [3,3]
+    out_size: [11,11]
+  modelP:
+    name: "hat_exp_phase"
+    nch_in: 2
+    nch_h: 64
+    nch_out: 2
+    layerNo: 5
+    filter_size: 3
+    in_size: [3,3]
+    out_size: [11,11]
+ 
+optim:
+  weight_decay: 0.000
+  optimizer: "Adam"
+  lr: 0.0001
+  beta1: 0.9
+  amsgrad: false
+  eps: 0.00000001
